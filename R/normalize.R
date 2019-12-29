@@ -23,7 +23,7 @@
 #' @export
 
 
-normalize <- function(x, method = c( "norm", "max")){
+normalize <- function(x, method = c( "norm", "gauss", "minmax")){
   method <- match.arg(method)
   if (method == "norm"){
     norm_x <-  apply(x, MARGIN = 2, function(y) {
