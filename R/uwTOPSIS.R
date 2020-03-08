@@ -267,14 +267,14 @@ uwTOPSIS <- function(x,
   scores_DF <- cbind(x[,1],
                      data.frame(Min = score_min,
                                 Max = score_max,
-                                AvTOPSIS = 0.5*(score_min+score_max),
+                                uwTOPSIS = 0.5*(score_min+score_max),
                                 row.names = NULL
                                 )
                      )
   colnames(scores_DF)[1] <- colnames(x)[1]
 
   if(ordered){
-    scores_DF <- scores_DF[sort(scores_DF$AvTOPSIS, decreasing = TRUE, index.return = TRUE)$ix,]
+    scores_DF <- scores_DF[sort(scores_DF$uwTOPSIS, decreasing = TRUE, index.return = TRUE)$ix,]
   }
 
 #
