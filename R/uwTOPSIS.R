@@ -259,7 +259,10 @@ uwTOPSIS <- function(x,
     solutions_max[i,] <- sols$solution
     score_max[i] <- -sols$objective
   }
-
+rownames(solutions_max) <- rownames(NormMat)
+rownames(solutions_min) <- rownames(NormMat)
+colnames(solutions_max) <- colnames(NormMat)
+colnames(solutions_min) <- colnames(NormMat)
 #
 # MERGING THE RESULTS IN A DATA.FRAME
 #
@@ -291,7 +294,7 @@ uwTOPSIS <- function(x,
       geom_ribbon(data = scores_DF, aes(ymin = Min, ymax = Max), fill = "gray", alpha =0.5) +
       geom_line(aes( y = Value, col = Score, group = Score, lty = Score)) +
       scale_linetype_manual(values=c("solid","dotted","dashed")) +
-      scale_color_manual(values = c("red", "black","black")) +
+      scale_color_manual(values = c("black", "black","red")) +
       geom_point(aes( y = Value, colour = Score, group = Score)) +
       theme_classic() +
       scale_x_continuous(breaks = 1:nrow(scores_DF), labels = scores_DF[,1]) +
