@@ -2,7 +2,7 @@
 % Please edit documentation in R/uwTOPSIS.R
 \name{uwTOPSIS}
 \alias{uwTOPSIS}
-\title{Unweihted TOPSIS}
+\title{Unweighted TOPSIS}
 \usage{
 uwTOPSIS(x, directions, norm.method = c("norm", "gauss", "minmax"), L = NULL, U = NULL, w0 = NULL)
 }

@@ -31,6 +31,16 @@ normalize <- function(x, method = c( "norm", "gauss", "minmax")){
       return(unname(res))
     }
     )
+  } else if (method == "minmax"){
+    norm_x <- apply(x, MARGIN = 2, function (y){
+      res <- (y - min(y)) / diff(range(y))
+      return(unname(res))
+    })
+  } else {
+    norm_x <- apply(x, MARGIN = 2, function (y){
+      res <- (y - mean(y)) / sd(y)
+      return(unname(res))
+    })
   }
   return(norm_x)
 }

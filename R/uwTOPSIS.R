@@ -1,4 +1,4 @@
-#' @title Unweihted TOPSIS
+#' @title Unweighted TOPSIS
 #'
 #' @description Computes the unweighted TOPSIS given the performance table.
 #'
@@ -97,7 +97,7 @@ uwTOPSIS <- function(x,
   # Normalizing data
 
   NormMat <- normalize(x[,-c(1)], method = norm.method)
-  rownames(NormMat) <- x[,1]
+  rownames(NormMat) <- x[,c(1)]
 
 
   #
@@ -233,8 +233,8 @@ uwTOPSIS <- function(x,
                    lb = L,
                    ub = U,
                    opts = list("algorithm" = "NLOPT_LN_COBYLA",
-                               "xtol_rel" = 1e-15,
-                               "xtol_abs" = 1e-15,
+                               "xtol_rel" = 1e-27,
+                               "xtol_abs" = 1e-27,
                                "maxeval" = 2000),
                    case = "lower", # lower = minimizing score, upper = maximizing score
                    i = i) # i is the number of alternative
@@ -300,6 +300,6 @@ uwTOPSIS <- function(x,
   }
 
 
-return(scores_DF)
+return(list(scores = scores_DF, weights_min = solutions_min, weights_max = solutions_max) )
 }
 
