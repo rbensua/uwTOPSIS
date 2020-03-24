@@ -4,7 +4,8 @@
 \name{JLS_1981}
 \alias{JLS_1981}
 \title{Data: E. Jacquet-Lagreze J. Siskos  (1981).}
-\format{Data frame (tibble) with 10 rows and 7 columns. The variables are:
+\format{
+Data frame (tibble) with 10 rows and 7 columns. The variables are:
 \describe{
   \item{CarModel}{Model of the car to be evaluated.}
   \item{MaxSpeed}{Maximum speed (km / h).}
@@ -13,7 +14,8 @@
   \item{UrbanCons}{Consumption in town (l / 100 km).}
   \item{HighCons}{Consumption at 120 km /h (l / 100 km).}
   \item{Price}{Price in French francs.}
-}}
+}
+}
 \source{
 E. Jacquet-Lagreze and J. Siskos  (1981). "Assessing a set of additive utility functions for multicriteria decision-making, the UTA method", European Journal of Operational Research,  10(2), 151-164. \code{doi}: 10.1016/0377-2217(82)90155-2
 }

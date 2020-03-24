@@ -9,6 +9,7 @@
 #' @param L numeric. Vector containing the lower bound for the weights of the criteria. If NULL (default) it will be zero.
 #' @param U numeric. Vector containing the upper bound for the weights of the criteria. If NULL (default) it will be one.
 #' @param w0 numeric. Vector containing the initial guess for the optimal weights of the criteria. If NULL (default) it will be (L+ U) / 2.
+#' @param forceideal logical. Forcing the ideal solution. If this parameter is TRUE, the normalized ideal solution is forced to be 1s for the maximizing criteria and 0 for the minimizing criteria. The corresponding antiideal solution would be its oposite. Defaults to FALSE.
 #' @param ordered. If TRUE the resulting table is ordered with respect the average TOPSIS score (descendent order). If FALSE (default) the resulting table is given in the same order as the input performance table.
 #' @author
 #'
@@ -35,6 +36,7 @@ uwTOPSIS <- function(x,
                      L = NULL,
                      U = NULL,
                      w0 = NULL,
+                     forceideal = FALSE,
                      ordered = FALSE,
                      makefigure = TRUE){
 
@@ -96,8 +98,10 @@ uwTOPSIS <- function(x,
 
   # Normalizing data
 
+  altnames <- apply(x, MARGIN = 1, FUN = function(y) y[1])
   NormMat <- normalize(x[,-c(1)], method = norm.method)
-  rownames(NormMat) <- x[,c(1)]
+
+  rownames(NormMat) <-   altnames
 
 
   #
@@ -114,15 +118,20 @@ uwTOPSIS <- function(x,
   mask_neg_max <- obj_neg == "max"
   mask_neg_min <- obj_neg == "min"
 
-  idx_max <- max.col(t(NormMat))
-  idx_min <- max.col(-t(NormMat))
+
 
   #
   # DETERMINING THE IDEAL AND ANTI-IDEAL SOLUTIONS
   #
-
-  maximums <- diag(NormMat[idx_max,])
-  minimums <- diag(NormMat[idx_min,])
+  if (forceideal){
+    maximums <- rep(1,ncol(NormMat))
+    minimums <- rep(0,ncol(NormMat))
+  } else{
+    idx_max <- max.col(t(NormMat))
+    idx_min <- max.col(-t(NormMat))
+    maximums <- diag(NormMat[idx_max,])
+    minimums <- diag(NormMat[idx_min,])
+  }
 
   opt_pos <- maximums*mask_pos_max + minimums*mask_pos_min
   opt_neg <- maximums*mask_neg_max + minimums*mask_neg_min
