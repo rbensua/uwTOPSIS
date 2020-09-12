@@ -32,7 +32,7 @@
 #' @export
 uwTOPSIS <- function(x,
                      directions,
-                     norm.method = c("norm", "gauss", "minmax"),
+                     norm.method = c("norm", "gauss", "minmax","none"),
                      L = NULL,
                      U = NULL,
                      w0 = NULL,
