@@ -24,7 +24,7 @@
 #' @export
 
 
-normalize <- function(x, method = c( "norm", "gauss", "minmax")){
+normalize <- function(x, method = c( "norm", "gauss", "minmax","none")){
   method <- match.arg(method)
   if (method == "norm"){
     norm_x <-  apply(x, MARGIN = 2, function(y) {
@@ -43,7 +43,10 @@ normalize <- function(x, method = c( "norm", "gauss", "minmax")){
       return(unname(res))
     })
   } else {
-    norm_x <- x
+    norm_x <- apply(x, MARGIN = 2, function (y){
+      res <- y
+      return(unname(res))
+    })
   }
   return(norm_x)
 }
